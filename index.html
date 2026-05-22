@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitWorld — Global Apparel Size Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ink: #1a1410;
+    --rust: #c4502a;
+    --gold: #d4a853;
+    --sage: #7a9e7e;
+    --sand: #e8dcc8;
+    --muted: #8a7f74;
+    --white: #fffdf8;
+    --blue: #3a5a8c;
+    --pink: #c4607a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  header {
+    background: var(--ink); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--rust);
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--cream); letter-spacing: -0.5px; padding: 1rem 0; }
+  .logo span { color: var(--rust); }
+  .tagline { font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  .hero { background: var(--ink); color: var(--cream); padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(196,80,42,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(212,168,83,0.1) 0%, transparent 50%); }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; position: relative; }
+  .hero h1 em { color: var(--rust); font-style: normal; }
+  .hero p { margin-top: 1rem; color: #a09080; font-size: 1rem; letter-spacing: 1px; position: relative; }
+
+  /* GENDER TOGGLE */
+  .gender-bar { background: var(--sand); border-bottom: 1.5px solid #d8ccb8; padding: 0.8rem 2rem; display: flex; align-items: center; gap: 1.5rem; }
+  .gender-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .gender-toggle { display: flex; border: 1.5px solid #c8b89a; border-radius: 3px; overflow: hidden; }
+  .gender-btn {
+    padding: 0.5rem 1.4rem; border: none; background: transparent;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; color: var(--muted); letter-spacing: 0.5px;
+    border-right: 1.5px solid #c8b89a;
+  }
+  .gender-btn:last-child { border-right: none; }
+  .gender-btn:hover { background: #e8d8c0; color: var(--ink); }
+  .gender-btn.active-men { background: var(--blue); color: white; }
+  .gender-btn.active-women { background: var(--pink); color: white; }
+  .gender-btn.active-unisex { background: var(--sage); color: white; }
+  .gender-indicator { font-size: 0.78rem; color: var(--muted); margin-left: auto; }
+  .gender-indicator span { font-weight: 600; }
+
+  /* TABS */
+  .tabs-section { padding: 2rem 2rem 0; max-width: 1200px; margin: 0 auto; }
+  .tabs-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tab-btn { padding: 0.55rem 1.2rem; border: 1.5px solid var(--sand); background: transparent; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--ink); cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
+  .tab-btn:hover { border-color: var(--rust); color: var(--rust); }
+  .tab-btn.active { background: var(--rust); border-color: var(--rust); color: white; }
+
+  /* MAIN */
+  .main { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
+
+  /* PREVIEW */
+  .preview-panel { background: var(--white); border: 1.5px solid var(--sand); border-radius: 4px; padding: 1.5rem; position: sticky; top: 80px; }
+  .preview-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--ink); border-bottom: 1.5px solid var(--sand); padding-bottom: 0.7rem; }
+  .svg-container { display: flex; align-items: center; justify-content: center; min-height: 260px; background: var(--cream); border-radius: 2px; padding: 1rem; }
+  .svg-container svg { max-width: 200px; width: 100%; transition: all 0.4s ease; }
+  .garment-name { text-align: center; margin-top: 1rem; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; }
+  .garment-sub { text-align: center; font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 0.2rem; }
+  .tip-box { margin-top: 1.2rem; background: #fff8f0; border-left: 3px solid var(--gold); padding: 0.8rem 1rem; font-size: 0.8rem; color: var(--ink); line-height: 1.5; }
+  .tip-box strong { color: var(--rust); display: block; margin-bottom: 0.3rem; }
+
+  /* TABLE PANEL */
+  .table-panel { flex: 1; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; }
+  .badge { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 2px; color: white; }
+  .badge-men { background: var(--blue); }
+  .badge-women { background: var(--pink); }
+  .badge-unisex { background: var(--sage); }
+
+  .country-filter { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .country-btn { padding: 0.35rem 0.85rem; border: 1.5px solid var(--sand); background: white; border-radius: 2px; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.15s; color: var(--ink); }
+  .country-btn:hover { border-color: var(--sage); }
+  .country-btn.active { background: var(--sage); border-color: var(--sage); color: white; }
+
+  .size-table-wrapper { overflow-x: auto; border: 1.5px solid var(--sand); border-radius: 4px; background: var(--white); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead { background: var(--ink); color: var(--cream); }
+  thead th { padding: 0.9rem 1rem; text-align: left; font-weight: 500; letter-spacing: 0.5px; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--sand); transition: background 0.15s; }
+  tbody tr:hover { background: #fdf7ee; }
+  tbody td { padding: 0.75rem 1rem; white-space: nowrap; }
+  tbody td:first-child { font-weight: 700; color: var(--rust); font-family: 'Playfair Display', serif; font-size: 1rem; }
+  .highlight-row { background: #fff5ec !important; }
+
+  .measure-section { margin-top: 1.5rem; background: var(--white); border: 1.5px solid var(--sand); border-radius: 4px; padding: 1.2rem 1.5rem; }
+  .measure-section h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--ink); }
+  .measure-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; }
+  .measure-card { background: var(--cream); border-radius: 3px; padding: 0.7rem 0.9rem; font-size: 0.78rem; line-height: 1.5; }
+  .measure-card strong { display: block; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rust); margin-bottom: 0.2rem; }
+
+  .no-data { padding: 2rem; text-align: center; color: var(--muted); font-style: italic; }
+
+  footer { margin-top: 4rem; background: var(--ink); color: #6a5f54; text-align: center; padding: 2rem; font-size: 0.78rem; letter-spacing: 1px; }
+  footer span { color: var(--rust); }
+
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .preview-panel { position: static; }
+    .gender-bar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">AllFit<span>World</span></div>
+  <div class="tagline">Global Apparel Size Guide</div>
+</header>
+
+<div class="hero">
+  <h1>Find Your <em>Perfect</em> Fit<br>Across Every Country</h1>
+  <p>Compare sizes · All categories · International standards</p>
+</div>
+
+<!-- GENDER TOGGLE BAR -->
+<div class="gender-bar">
+  <div class="gender-label">Gender Cut</div>
+  <div class="gender-toggle">
+    <button class="gender-btn" id="btnMen" onclick="setGender('men')">♂ Men</button>
+    <button class="gender-btn" id="btnWomen" onclick="setGender('women')">♀ Women</button>
+    <button class="gender-btn" id="btnUnisex" onclick="setGender('unisex')">⊕ Unisex</button>
+  </div>
+  <div class="gender-indicator">Viewing: <span id="genderLabel">Women</span></div>
+</div>
+
+<div class="tabs-section">
+  <div class="tabs-label">Choose Category</div>
+  <div class="tabs" id="categoryTabs"></div>
+</div>
+
+<div class="main">
+  <div class="preview-panel">
+    <div class="preview-title">📐 Garment Preview</div>
+    <div class="svg-container" id="svgContainer"></div>
+    <div class="garment-name" id="garmentName"></div>
+    <div class="garment-sub" id="garmentSub"></div>
+    <div class="tip-box"><strong>📏 How to Measure</strong><span id="tipText"></span></div>
+  </div>
+
+  <div class="table-panel">
+    <div class="section-header">
+      <h2 id="tableTitle"></h2>
+      <div class="badge" id="genderBadge">Size Guide</div>
+    </div>
+    <div class="country-filter" id="countryFilter"></div>
+    <div class="size-table-wrapper">
+      <table id="sizeTable">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div class="measure-section">
+      <h3>🔍 Key Measurements to Know</h3>
+      <div class="measure-grid" id="measureGrid"></div>
+    </div>
+  </div>
+</div>
+
+<footer>Made with ❤️ — <span>FitWorld</span> Global Size Guide &nbsp;·&nbsp; All sizes approximate. Always check brand-specific charts.</footer>
+
+<script>
+// ── SVGs ──────────────────────────────────────────────────────────────────────
+var svgMap = {
+  tops_women: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gtw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><path d="M52,28 L32,18 L12,50 L32,56 L34,175 L126,175 L128,56 L148,50 L128,18 L108,28 Q80,44 52,28Z" fill="url(#gtw)" stroke="#1a1410" stroke-width="2"/><path d="M52,28 Q80,52 108,28" fill="none" stroke="#1a1410" stroke-width="2"/><line x1="34" y1="90" x2="126" y2="90" stroke="#fff" stroke-width="1.5"/><polygon points="34,88 29,90 34,92" fill="#fff"/><polygon points="126,88 131,90 126,92" fill="#fff"/><text x="80" y="86" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">BUST</text><line x1="38" y1="120" x2="122" y2="120" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="116" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  tops_men: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gtm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#5a7aac"/></linearGradient></defs><path d="M48,25 L28,15 L8,50 L30,56 L30,175 L130,175 L130,56 L152,50 L132,15 L112,25 Q80,38 48,25Z" fill="url(#gtm)" stroke="#1a1410" stroke-width="2"/><path d="M48,25 L62,35 L80,30 L98,35 L112,25" fill="none" stroke="#1a1410" stroke-width="2"/><line x1="30" y1="85" x2="130" y2="85" stroke="#fff" stroke-width="1.5"/><polygon points="30,83 25,85 30,87" fill="#fff"/><polygon points="130,83 135,85 130,87" fill="#fff"/><text x="80" y="81" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text><line x1="30" y1="115" x2="130" y2="115" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="111" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">SHOULDER WIDTH</text></svg>',
+  tops_unisex: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gtu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><path d="M50,26 L30,16 L10,50 L30,56 L30,175 L130,175 L130,56 L150,50 L130,16 L110,26 Q80,40 50,26Z" fill="url(#gtu)" stroke="#1a1410" stroke-width="2"/><path d="M50,26 Q80,46 110,26" fill="none" stroke="#1a1410" stroke-width="2"/><line x1="30" y1="88" x2="130" y2="88" stroke="#fff" stroke-width="1.5"/><polygon points="30,86 25,88 30,90" fill="#fff"/><polygon points="130,86 135,88 130,90" fill="#fff"/><text x="80" y="84" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  bottoms_women: '<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gbfw" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#8a3050"/></linearGradient></defs><rect x="28" y="20" width="104" height="18" rx="3" fill="#a03060"/><path d="M28,38 L22,195 Q42,210 58,195 L80,105 L102,195 Q118,210 138,195 L132,38Z" fill="url(#gbfw)" stroke="#1a1410" stroke-width="2"/><line x1="28" y1="29" x2="132" y2="29" stroke="#d4a853" stroke-width="1.5"/><polygon points="28,27 23,29 28,31" fill="#d4a853"/><polygon points="132,27 137,29 132,31" fill="#d4a853"/><text x="80" y="18" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text><line x1="42" y1="80" x2="118" y2="80" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="76" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">HIPS</text></svg>',
+  bottoms_men: '<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gbfm" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><rect x="28" y="20" width="104" height="18" rx="3" fill="#2a4a7c"/><path d="M28,38 L28,195 Q48,208 62,195 L80,105 L98,195 Q112,208 132,195 L132,38Z" fill="url(#gbfm)" stroke="#1a1410" stroke-width="2"/><line x1="80" y1="105" x2="80" y2="38" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><path d="M33,60 Q48,58 53,72 L53,85 L33,85Z" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/><line x1="28" y1="29" x2="132" y2="29" stroke="#d4a853" stroke-width="1.5"/><polygon points="28,27 23,29 28,31" fill="#d4a853"/><polygon points="132,27 137,29 132,31" fill="#d4a853"/><text x="80" y="18" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text><line x1="50" y1="105" x2="50" y2="195" stroke="#fff" stroke-width="1.2" stroke-dasharray="3,2"/><text x="42" y="152" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif" transform="rotate(-90,42,152)">INSEAM</text></svg>',
+  bottoms_unisex: '<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gbfu" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><rect x="28" y="20" width="104" height="18" rx="3" fill="#5a8a6a"/><path d="M28,38 L26,195 Q46,210 60,195 L80,105 L100,195 Q114,210 134,195 L132,38Z" fill="url(#gbfu)" stroke="#1a1410" stroke-width="2"/><line x1="28" y1="29" x2="132" y2="29" stroke="#d4a853" stroke-width="1.5"/><polygon points="28,27 23,29 28,31" fill="#d4a853"/><polygon points="132,27 137,29 132,31" fill="#d4a853"/><text x="80" y="18" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  dresses_women: '<svg viewBox="0 0 160 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#8a3050"/></linearGradient></defs><path d="M55,18 Q80,30 105,18 L115,30 Q120,40 115,55 L100,55 L112,230 L48,230 L60,55 L45,55 Q40,40 45,30Z" fill="url(#gdw)" stroke="#1a1410" stroke-width="2"/><path d="M55,18 Q80,38 105,18" fill="none" stroke="#1a1410" stroke-width="2"/><line x1="45" y1="70" x2="115" y2="70" stroke="#fff" stroke-width="1.5"/><polygon points="45,68 40,70 45,72" fill="#fff"/><polygon points="115,68 120,70 115,72" fill="#fff"/><text x="80" y="66" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">BUST</text><line x1="50" y1="110" x2="110" y2="110" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="106" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text><line x1="48" y1="155" x2="112" y2="155" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="151" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">HIPS</text></svg>',
+  dresses_unisex: '<svg viewBox="0 0 160 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#4a7a5a"/></linearGradient></defs><path d="M55,18 Q80,30 105,18 L115,30 Q120,40 115,55 L100,55 L110,230 L50,230 L60,55 L45,55 Q40,40 45,30Z" fill="url(#gdu)" stroke="#1a1410" stroke-width="2"/><path d="M55,18 Q80,38 105,18" fill="none" stroke="#1a1410" stroke-width="2"/><line x1="45" y1="70" x2="115" y2="70" stroke="#fff" stroke-width="1.5"/><polygon points="45,68 40,70 45,72" fill="#fff"/><polygon points="115,68 120,70 115,72" fill="#fff"/><text x="80" y="66" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">BUST / CHEST</text></svg>',
+  outerwear_women: '<svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#7a3050"/></linearGradient></defs><path d="M62,25 L38,15 L12,55 L34,62 L36,195 L144,195 L146,62 L168,55 L142,15 L118,25 Q90,40 62,25Z" fill="url(#gow)" stroke="#1a1410" stroke-width="2.5"/><path d="M62,25 L76,42 L90,36 L104,42 L118,25" fill="none" stroke="#1a1410" stroke-width="2.5"/><path d="M76,42 L72,80 L88,75" fill="#a04060" stroke="#7a2040" stroke-width="1.5"/><path d="M104,42 L108,80 L92,75" fill="#a04060" stroke="#7a2040" stroke-width="1.5"/><line x1="34" y1="95" x2="146" y2="95" stroke="#d4a853" stroke-width="1.5"/><polygon points="34,93 29,95 34,97" fill="#d4a853"/><polygon points="146,93 151,95 146,97" fill="#d4a853"/><text x="90" y="91" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">BUST</text></svg>',
+  outerwear_men: '<svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gom" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4a4a4a"/><stop offset="100%" style="stop-color:#2a2a2a"/></linearGradient></defs><path d="M60,25 L35,15 L10,55 L32,62 L32,195 L148,195 L148,62 L170,55 L145,15 L120,25 Q90,38 60,25Z" fill="url(#gom)" stroke="#1a1410" stroke-width="2.5"/><path d="M60,25 L75,40 L90,35 L105,40 L120,25" fill="none" stroke="#c4502a" stroke-width="2.5"/><path d="M75,40 L72,80 L88,75" fill="#5a5a5a" stroke="#333" stroke-width="1.5"/><path d="M105,40 L108,80 L92,75" fill="#5a5a5a" stroke="#333" stroke-width="1.5"/><line x1="90" y1="75" x2="90" y2="195" stroke="#c4502a" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="37" y="130" width="30" height="15" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="32" y1="95" x2="148" y2="95" stroke="#d4a853" stroke-width="1.5"/><polygon points="32,93 27,95 32,97" fill="#d4a853"/><polygon points="148,93 153,95 148,97" fill="#d4a853"/><text x="90" y="91" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  outerwear_unisex: '<svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gou" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><path d="M60,25 L35,15 L10,55 L32,62 L32,195 L148,195 L148,62 L170,55 L145,15 L120,25 Q90,38 60,25Z" fill="url(#gou)" stroke="#1a1410" stroke-width="2.5"/><path d="M60,25 L75,40 L90,35 L105,40 L120,25" fill="none" stroke="#1a1410" stroke-width="2.5"/><line x1="32" y1="95" x2="148" y2="95" stroke="#d4a853" stroke-width="1.5"/><polygon points="32,93 27,95 32,97" fill="#d4a853"/><polygon points="148,93 153,95 148,97" fill="#d4a853"/><text x="90" y="91" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  bra_women: '<svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gbr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><path d="M25,85 Q25,35 75,40 L90,80 Q65,90 25,85Z" fill="url(#gbr)" stroke="#1a1410" stroke-width="2"/><path d="M155,85 Q155,35 105,40 L90,80 Q115,90 155,85Z" fill="url(#gbr)" stroke="#1a1410" stroke-width="2"/><path d="M25,85 L15,80 L15,100 L165,100 L165,80 L155,85" fill="none" stroke="#c4607a" stroke-width="2.5"/><line x1="55" y1="42" x2="60" y2="15" stroke="#1a1410" stroke-width="2"/><line x1="125" y1="42" x2="120" y2="15" stroke="#1a1410" stroke-width="2"/><path d="M85,80 Q90,60 95,80" fill="none" stroke="#1a1410" stroke-width="1.5"/><line x1="15" y1="110" x2="165" y2="110" stroke="#fff" stroke-width="1.5"/><polygon points="15,108 10,110 15,112" fill="#fff"/><polygon points="165,108 170,110 165,112" fill="#fff"/><text x="90" y="128" fill="#1a1410" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">UNDERBUST (BAND)</text><text x="90" y="52" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">OVERBUST = CUP SIZE</text></svg>',
+  shoes_women: '<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#8a3050"/></linearGradient></defs><path d="M15,95 Q15,110 50,112 L165,112 Q185,110 185,98 Q185,88 170,86 L170,70 Q168,60 155,55 L120,48 Q100,35 75,38 L50,45 Q30,50 20,65 Q13,75 15,95Z" fill="#3a3030" stroke="#1a1410" stroke-width="2"/><path d="M20,65 Q13,75 15,95 L30,90 L30,70Z" fill="url(#gsw)" stroke="#1a1410" stroke-width="1.5"/><path d="M30,70 L30,90 L160,88 Q175,85 170,70 Q168,60 155,55 L120,48 Q100,35 75,38 L50,45 Q32,52 30,70Z" fill="url(#gsw)" stroke="#1a1410" stroke-width="2"/><line x1="15" y1="120" x2="185" y2="120" stroke="#d4a853" stroke-width="1.5"/><polygon points="15,118 10,120 15,122" fill="#d4a853"/><polygon points="185,118 190,120 185,122" fill="#d4a853"/><text x="100" y="115" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT LENGTH</text></svg>',
+  shoes_men: '<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><path d="M15,90 Q15,108 55,112 L170,112 Q190,110 190,98 Q190,85 175,82 L175,68 Q172,58 158,52 L125,45 Q105,35 80,38 L55,45 Q32,52 22,68 Q14,78 15,90Z" fill="#2a2a2a" stroke="#1a1410" stroke-width="2"/><path d="M22,68 Q14,78 15,90 L32,86 L32,68Z" fill="url(#gsm)" stroke="#1a1410" stroke-width="1.5"/><path d="M32,68 L32,86 L165,84 Q180,80 175,68 Q172,58 158,52 L125,45 Q105,35 80,38 L55,45 Q34,52 32,68Z" fill="url(#gsm)" stroke="#1a1410" stroke-width="2"/><rect x="80" y="48" width="65" height="32" rx="3" fill="rgba(0,0,0,0.2)"/><line x1="85" y1="55" x2="140" y2="55" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><line x1="85" y1="62" x2="140" y2="62" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><line x1="85" y1="69" x2="140" y2="69" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><line x1="15" y1="120" x2="190" y2="120" stroke="#d4a853" stroke-width="1.5"/><polygon points="15,118 10,120 15,122" fill="#d4a853"/><polygon points="190,118 195,120 190,122" fill="#d4a853"/><text x="102" y="115" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT LENGTH</text></svg>',
+  shoes_unisex: '<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><path d="M15,92 Q15,110 52,112 L168,112 Q188,110 188,98 Q188,86 172,83 L172,68 Q170,58 156,53 L122,46 Q102,35 77,38 L52,45 Q30,52 20,68 Q13,78 15,92Z" fill="#2a3a2a" stroke="#1a1410" stroke-width="2"/><path d="M20,68 Q13,78 15,92 L30,88 L30,68Z" fill="url(#gsu)" stroke="#1a1410" stroke-width="1.5"/><path d="M30,68 L30,88 L162,86 Q177,82 172,68 Q170,58 156,53 L122,46 Q102,35 77,38 L52,45 Q32,52 30,68Z" fill="url(#gsu)" stroke="#1a1410" stroke-width="2"/><line x1="15" y1="120" x2="188" y2="120" stroke="#d4a853" stroke-width="1.5"/><polygon points="15,118 10,120 15,122" fill="#d4a853"/><polygon points="188,118 193,120 188,122" fill="#d4a853"/><text x="101" y="115" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT LENGTH</text></svg>',
+  kids_unisex: '<svg viewBox="0 0 160 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gku" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><circle cx="80" cy="22" r="18" fill="#f5c8a0" stroke="#1a1410" stroke-width="1.5"/><path d="M55,40 L40,35 L25,58 L40,63 L40,110 L120,110 L120,63 L135,58 L120,35 L105,40 Q80,52 55,40Z" fill="url(#gku)" stroke="#1a1410" stroke-width="2"/><path d="M40,110 L40,195 Q55,205 65,195 L80,145 L95,195 Q105,205 120,195 L120,110Z" fill="#3a5a8c" stroke="#1a1410" stroke-width="2"/><line x1="145" y1="4" x2="145" y2="200" stroke="#c4502a" stroke-width="1.5"/><polygon points="143,4 145,0 147,4" fill="#c4502a"/><polygon points="143,200 145,204 147,200" fill="#c4502a"/><text x="157" y="105" fill="#c4502a" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif" transform="rotate(90,157,105)">HEIGHT</text></svg>',
+  sportswear_women: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gspw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#8a3050"/></linearGradient></defs><path d="M50,22 L30,14 L12,48 L32,54 L32,130 L128,130 L128,54 L148,48 L130,14 L110,22 Q80,36 50,22Z" fill="url(#gspw)" stroke="#1a1410" stroke-width="2"/><path d="M50,22 Q80,42 110,22" fill="none" stroke="#1a1410" stroke-width="2"/><rect x="32" y="130" width="45" height="55" fill="#a03060" stroke="#1a1410" stroke-width="1.5"/><rect x="83" y="130" width="45" height="55" fill="#a03060" stroke="#1a1410" stroke-width="1.5"/><line x1="32" y1="82" x2="128" y2="82" stroke="#fff" stroke-width="1.5"/><polygon points="32,80 27,82 32,84" fill="#fff"/><polygon points="128,80 133,82 128,84" fill="#fff"/><text x="80" y="78" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  sportswear_men: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gspm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><path d="M48,22 L28,14 L10,50 L30,56 L30,130 L130,130 L130,56 L150,50 L132,14 L112,22 Q80,36 48,22Z" fill="url(#gspm)" stroke="#1a1410" stroke-width="2"/><path d="M48,22 L62,32 L80,28 L98,32 L112,22" fill="none" stroke="#1a1410" stroke-width="2"/><rect x="30" y="130" width="46" height="55" fill="#2a4a7c" stroke="#1a1410" stroke-width="1.5"/><rect x="84" y="130" width="46" height="55" fill="#2a4a7c" stroke="#1a1410" stroke-width="1.5"/><line x1="30" y1="82" x2="130" y2="82" stroke="#fff" stroke-width="1.5"/><polygon points="30,80 25,82 30,84" fill="#fff"/><polygon points="130,80 135,82 130,84" fill="#fff"/><text x="80" y="78" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  sportswear_unisex: '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gspu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><path d="M48,22 L28,14 L10,50 L30,56 L30,130 L130,130 L130,56 L150,50 L132,14 L112,22 Q80,36 48,22Z" fill="url(#gspu)" stroke="#1a1410" stroke-width="2"/><path d="M48,22 Q80,42 112,22" fill="none" stroke="#1a1410" stroke-width="2"/><rect x="30" y="130" width="46" height="55" fill="#5a8a6a" stroke="#1a1410" stroke-width="1.5"/><rect x="84" y="130" width="46" height="55" fill="#5a8a6a" stroke="#1a1410" stroke-width="1.5"/><line x1="30" y1="82" x2="130" y2="82" stroke="#fff" stroke-width="1.5"/><polygon points="30,80 25,82 30,84" fill="#fff"/><polygon points="130,80 135,82 130,84" fill="#fff"/><text x="80" y="78" fill="#fff" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">CHEST</text></svg>',
+  swimwear_women: '<svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsww" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><path d="M45,20 Q80,35 115,20 L120,50 L95,55 L90,75 L70,75 L65,55 L40,50Z" fill="url(#gsww)" stroke="#1a1410" stroke-width="2"/><line x1="55" y1="22" x2="60" y2="5" stroke="#1a1410" stroke-width="1.5"/><line x1="105" y1="22" x2="100" y2="5" stroke="#1a1410" stroke-width="1.5"/><path d="M40,95 L38,165 Q58,175 70,165 L80,120 L90,165 Q102,175 122,165 L120,95 Q100,88 80,90 Q60,88 40,95Z" fill="url(#gsww)" stroke="#1a1410" stroke-width="2"/><line x1="40" y1="105" x2="120" y2="105" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="101" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">HIPS</text></svg>',
+  swimwear_men: '<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gswm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><rect x="25" y="15" width="110" height="14" rx="3" fill="#2a4a7c"/><path d="M25,29 L20,110 Q42,122 58,110 L80,60 L102,110 Q118,122 140,110 L135,29Z" fill="url(#gswm)" stroke="#1a1410" stroke-width="2"/><line x1="25" y1="24" x2="135" y2="24" stroke="#d4a853" stroke-width="1.5"/><polygon points="25,22 20,24 25,26" fill="#d4a853"/><polygon points="135,22 140,24 135,26" fill="#d4a853"/><text x="80" y="14" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  swimwear_unisex: '<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gswu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><rect x="25" y="15" width="110" height="14" rx="3" fill="#5a8a6a"/><path d="M25,29 L20,110 Q42,122 58,110 L80,60 L102,110 Q118,122 140,110 L135,29Z" fill="url(#gswu)" stroke="#1a1410" stroke-width="2"/><line x1="25" y1="24" x2="135" y2="24" stroke="#d4a853" stroke-width="1.5"/><polygon points="25,22 20,24 25,26" fill="#d4a853"/><polygon points="135,22 140,24 135,26" fill="#d4a853"/><text x="80" y="14" fill="#d4a853" font-size="9" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  underwear_women: '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="guw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#d4a853"/></linearGradient></defs><path d="M20,20 Q80,35 140,20 L145,50 Q120,80 80,85 Q40,80 15,50Z" fill="url(#guw)" stroke="#1a1410" stroke-width="2"/><path d="M20,20 Q80,10 140,20" fill="none" stroke="#1a1410" stroke-width="1.5"/><line x1="20" y1="30" x2="140" y2="30" stroke="#fff" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="26" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST / HIPS</text></svg>',
+  underwear_men: '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gum" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><path d="M18,18 Q80,30 142,18 L145,50 Q125,90 80,92 Q35,90 15,50Z" fill="url(#gum)" stroke="#1a1410" stroke-width="2"/><path d="M18,18 Q80,8 142,18" fill="none" stroke="#1a1410" stroke-width="1.5"/><line x1="65" y1="55" x2="95" y2="55" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><line x1="18" y1="28" x2="142" y2="28" stroke="#d4a853" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="24" fill="#d4a853" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  underwear_unisex: '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="guu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><path d="M18,18 Q80,30 142,18 L145,50 Q125,90 80,92 Q35,90 15,50Z" fill="url(#guu)" stroke="#1a1410" stroke-width="2"/><path d="M18,18 Q80,8 142,18" fill="none" stroke="#1a1410" stroke-width="1.5"/><line x1="18" y1="28" x2="142" y2="28" stroke="#d4a853" stroke-width="1.2" stroke-dasharray="4,2"/><text x="80" y="24" fill="#d4a853" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">WAIST</text></svg>',
+  socks_unisex: '<svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsk" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#7a9e7e"/><stop offset="100%" style="stop-color:#3a6a4a"/></linearGradient></defs><rect x="55" y="10" width="50" height="80" rx="8" fill="url(#gsk)" stroke="#1a1410" stroke-width="2"/><path d="M55,80 L55,120 Q55,155 95,158 L125,155 Q140,148 138,130 L105,90" fill="url(#gsk)" stroke="#1a1410" stroke-width="2"/><line x1="55" y1="30" x2="105" y2="30" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><line x1="55" y1="40" x2="105" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><text x="80" y="72" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT SIZE</text></svg>',
+  socks_women: '<svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gskw" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#c4607a"/><stop offset="100%" style="stop-color:#8a3050"/></linearGradient></defs><rect x="55" y="10" width="50" height="80" rx="8" fill="url(#gskw)" stroke="#1a1410" stroke-width="2"/><path d="M55,80 L55,120 Q55,155 95,158 L125,155 Q140,148 138,130 L105,90" fill="url(#gskw)" stroke="#1a1410" stroke-width="2"/><line x1="55" y1="30" x2="105" y2="30" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><line x1="55" y1="40" x2="105" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><text x="80" y="72" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT SIZE</text></svg>',
+  socks_men: '<svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gskm" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#3a5a8c"/><stop offset="100%" style="stop-color:#1a2f4a"/></linearGradient></defs><rect x="50" y="10" width="58" height="85" rx="8" fill="url(#gskm)" stroke="#1a1410" stroke-width="2"/><path d="M50,85 L50,125 Q50,160 92,163 L128,160 Q145,152 143,133 L108,95" fill="url(#gskm)" stroke="#1a1410" stroke-width="2"/><line x1="50" y1="30" x2="108" y2="30" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><line x1="50" y1="40" x2="108" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><text x="80" y="76" fill="#fff" font-size="8" text-anchor="middle" font-family="DM Sans,sans-serif">FOOT SIZE</text></svg>'
+};
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+var categories = [
+  { id:'tops',       label:'👕 Tops',         genders:['women','men','unisex'] },
+  { id:'bottoms',    label:'👖 Bottoms',       genders:['women','men','unisex'] },
+  { id:'dresses',    label:'👗 Dresses',       genders:['women','unisex'] },
+  { id:'outerwear',  label:'🧥 Outerwear',     genders:['women','men','unisex'] },
+  { id:'bra',        label:'👙 Bras',          genders:['women'] },
+  { id:'swimwear',   label:'🩱 Swimwear',      genders:['women','men','unisex'] },
+  { id:'sportswear', label:'🏃 Sportswear',    genders:['women','men','unisex'] },
+  { id:'underwear',  label:'🩲 Underwear',     genders:['women','men','unisex'] },
+  { id:'shoes',      label:'👟 Footwear',      genders:['women','men','unisex'] },
+  { id:'socks',      label:'🧦 Socks',         genders:['women','men','unisex'] },
+  { id:'kids',       label:'🧒 Kids',          genders:['unisex'] }
+];
+
+var tableData = {
+  tops: {
+    women: {
+      title:'Tops & T-Shirts — Women', sub:'Bust measurement in cm',
+      tip:'Measure bust at fullest point over bra. Keep tape horizontal and parallel to the floor.',
+      measures:[{label:'Bust',desc:'Around fullest part of chest, over bra'},{label:'Waist',desc:'Narrowest part of torso'},{label:'Shoulder',desc:'Seam to seam across back'},{label:'Length',desc:'Shoulder point to hem'}],
+      countries:['Label','US/CA','UK/AU','EU','FR','IT','JP','CN','KR','Bust cm','Bust in'],
+      rows:[['XS','XS','6','32','34','36','S','155/80A','44','76–80','30–31.5'],['S','S','8','34','36','38','M','160/84A','55','80–84','31.5–33'],['M','M','10','36','38','40','L','165/88A','66','84–88','33–34.5'],['L','L','12','38','40','42','XL','170/92A','77','88–92','34.5–36'],['XL','XL','14','40','42','44','XXL','175/96A','88','92–96','36–38'],['XXL','XXL','16','42','44','46','3XL','180/100A','99','96–100','38–39.5'],['3XL','1X','18','44','46','48','4XL','185/104A','—','100–104','39.5–41']]
+    },
+    men: {
+      title:'Tops & T-Shirts — Men', sub:'Chest measurement in cm',
+      tip:'Measure chest at fullest point with arms relaxed. Add 2–4 cm for a comfortable fit.',
+      measures:[{label:'Chest',desc:'Around fullest part, arms relaxed'},{label:'Shoulder',desc:'Seam to seam across back'},{label:'Sleeve',desc:'Shoulder tip to wrist'},{label:'Neck',desc:'Around base of neck + 1 cm ease'}],
+      countries:['Label','US/CA','UK','EU','FR','IT','JP','CN','Chest cm','Chest in','Neck cm'],
+      rows:[['XS','XS','34','44','44','44','S','155/80A','82–86','32–34','36–37'],['S','S','36','46','46','46','M','160/84A','86–90','34–35.5','37–38'],['M','M','38–40','48–50','48–50','48–50','L','165/88A','90–94','35.5–37','38–39'],['L','L','42–44','52–54','52–54','52–54','XL','170/92A','94–98','37–38.5','39–40'],['XL','XL','46','56','56','56','XXL','175/96A','98–102','38.5–40','40–41'],['XXL','XXL','48','58','58','58','3XL','180/100A','102–106','40–42','41–42'],['3XL','3XL','50','60','60','60','4XL','185/104A','106–110','42–43.5','42–44']]
+    },
+    unisex: {
+      title:'Tops & T-Shirts — Unisex', sub:'Chest measurement in cm',
+      tip:'Unisex tops are cut wider. Women may size down 1; men may find them true to size.',
+      measures:[{label:'Chest',desc:'Fullest part of chest'},{label:'Shoulder',desc:'Back seam to seam'},{label:'Length',desc:'Shoulder to hem'},{label:'Sleeve',desc:'Shoulder to wrist'}],
+      countries:['Label','US','UK','EU','JP','CN','Chest cm','Chest in'],
+      rows:[['XS','XS','6–8','44–46','S','155–160A','80–86','31.5–34'],['S','S','8–10','46–48','M','160–165A','86–92','34–36'],['M','M','10–12','48–50','L','165–170A','92–98','36–38.5'],['L','L','12–14','50–52','XL','170–175A','98–104','38.5–41'],['XL','XL','14–16','52–54','XXL','175–180A','104–110','41–43'],['2XL','2XL','16–18','54–56','3XL','180–185A','110–116','43–45.5']]
+    }
+  },
+  bottoms: {
+    women: {
+      title:'Bottoms & Pants — Women', sub:'Waist & Hip measurements in cm',
+      tip:'Measure natural waist and fullest hips. For jeans check inseam length too.',
+      measures:[{label:'Waist',desc:'Narrowest point of torso'},{label:'Hips',desc:'Fullest part of hips & seat'},{label:'Inseam',desc:'Crotch to ankle along inner leg'},{label:'Rise',desc:'Crotch to waistband top'}],
+      countries:['Label','US','UK','EU','FR','IT','AU','JP','Waist cm','Hip cm'],
+      rows:[['XS','0','6','32','34','36','6','55','60–64','85–89'],['S','2','8','34','36','38','8','58','64–68','89–93'],['S','4','10','36','38','40','10','60','68–72','93–97'],['M','6','12','38','40','42','12','62','72–76','97–101'],['M','8','14','40','42','44','14','64','76–80','101–105'],['L','10','16','42','44','46','16','67','80–84','105–109'],['XL','12','18','44','46','48','18','70','84–88','109–113'],['XXL','14','20','46','48','50','20','73','88–94','113–119']]
+    },
+    men: {
+      title:'Bottoms & Pants — Men', sub:'Waist × Inseam (inches)',
+      tip:'Men\'s pants use waist and inseam in inches. Measure natural waist and inside leg to ankle.',
+      measures:[{label:'Waist',desc:'Natural waist, breathe out'},{label:'Inseam',desc:'Crotch to ankle'},{label:'Hips',desc:'Fullest part of seat'},{label:'Thigh',desc:'Around fullest part of thigh'}],
+      countries:['Waist×Inseam','EU','JP','Waist cm','Inseam cm','Hip cm'],
+      rows:[['28×30','44','70','68–72','74–77','88–92'],['29×30','45','71','72–74','74–77','90–94'],['30×30','46','72','74–76','74–77','92–96'],['30×32','46','72','74–76','79–82','92–96'],['32×30','48','74','78–80','74–77','96–100'],['32×32','48','74','78–80','79–82','96–100'],['34×32','50','76','83–85','79–82','100–104'],['36×32','52','78','88–90','79–82','104–108'],['38×32','54','80','93–95','79–82','108–112'],['40×32','56','82','98–102','79–82','112–116']]
+    },
+    unisex: {
+      title:'Bottoms — Unisex', sub:'Waist measurement in cm',
+      tip:'Unisex bottoms follow men\'s waist sizing. Women typically size down 2 sizes.',
+      measures:[{label:'Waist',desc:'Natural waist circumference'},{label:'Hips',desc:'Fullest part'},{label:'Inseam',desc:'Crotch to ankle'}],
+      countries:['Label','US','UK','EU','Waist cm','Hip cm'],
+      rows:[['XS','24–25','6','32','60–65','85–90'],['S','26–27','8','34','65–70','90–95'],['M','28–30','10–12','36–38','70–76','95–101'],['L','32–34','14–16','40–42','79–87','101–109'],['XL','36–38','18–20','44–46','90–97','109–117'],['XXL','40–42','22–24','48–50','100–108','117–125']]
+    }
+  },
+  dresses: {
+    women: {
+      title:'Dresses & Skirts — Women', sub:'Bust / Waist / Hip in cm',
+      tip:'For dresses, use the largest measurement to guide your size. Check brand-specific charts for stretch vs structured fabrics.',
+      measures:[{label:'Bust',desc:'Fullest part of bust, over bra'},{label:'Waist',desc:'1 inch above navel'},{label:'Hips',desc:'Fullest part, 7–9 inches below waist'},{label:'Length',desc:'Shoulder to hem'}],
+      countries:['Label','US','UK','EU','FR','IT','AU','JP','Bust cm','Waist cm','Hip cm'],
+      rows:[['XS','0','4','32','34','36','6','5','76–80','58–62','82–86'],['S','2','6','34','36','38','8','7','80–84','62–66','86–90'],['S','4','8','36','38','40','10','9','84–88','66–70','90–94'],['M','6','10','38','40','42','12','11','88–92','70–74','94–98'],['M','8','12','40','42','44','14','13','92–96','74–78','98–102'],['L','10','14','42','44','46','16','15','96–100','78–82','102–106'],['XL','12','16','44','46','48','18','17','100–104','82–86','106–110'],['XXL','14','18','46','48','50','20','19','104–110','86–92','110–116']]
+    },
+    unisex: {
+      title:'Dresses & Kaftans — Unisex', sub:'Chest / Waist measurement in cm',
+      tip:'Unisex/gender-neutral dresses are sized by chest or waist. Relaxed fit — size down for a closer look.',
+      measures:[{label:'Chest',desc:'Fullest part of chest'},{label:'Waist',desc:'Natural waist'},{label:'Length',desc:'Shoulder to hem'}],
+      countries:['Label','US','UK','EU','Chest cm','Waist cm'],
+      rows:[['XS','XS','6–8','44','78–84','60–66'],['S','S','8–10','46','84–90','66–72'],['M','M','10–12','48','90–96','72–78'],['L','L','12–14','50','96–102','78–84'],['XL','XL','14–16','52','102–108','84–90'],['XXL','XXL','18–20','54','108–116','90–98']]
+    }
+  },
+  outerwear: {
+    women: {
+      title:'Outerwear & Jackets — Women', sub:'Bust measurement in cm',
+      tip:'For women\'s jackets, measure bust over a light layer. Structured coats run 1 size larger.',
+      measures:[{label:'Bust',desc:'Fullest part over a thin shirt'},{label:'Shoulder',desc:'Back width seam to seam'},{label:'Sleeve',desc:'Shoulder tip to wrist'},{label:'Length',desc:'Nape of neck to hem'}],
+      countries:['Label','US','UK','EU','FR','IT','JP','Bust cm','Bust in'],
+      rows:[['XS','0–2','6–8','32–34','34','36','S','80–84','31.5–33'],['S','4–6','8–10','36–38','36–38','38–40','M','84–88','33–34.5'],['M','8–10','12–14','40–42','40–42','42–44','L','88–92','34.5–36'],['L','12–14','16–18','44–46','44','46','XL','92–96','36–38'],['XL','16','20','48','46','48','XXL','96–100','38–39.5'],['XXL','18','22','50','48','50','3XL','100–106','39.5–42']]
+    },
+    men: {
+      title:'Outerwear & Jackets — Men', sub:'Chest measurement in cm',
+      tip:'Men\'s jackets: measure chest over shirt. Blazers often use chest only; outerwear adds ease for layering.',
+      measures:[{label:'Chest',desc:'Fullest part over shirt'},{label:'Shoulder',desc:'Back seam to seam'},{label:'Sleeve',desc:'Shoulder to wrist'},{label:'Back Length',desc:'Nape to hem'}],
+      countries:['Label','US/CA','UK','EU','IT','JP','CN','Chest cm','Chest in'],
+      rows:[['XS','XS','34','44','44','S','155/80A','82–86','32–34'],['S','S','36','46','46','M','160/84A','86–90','34–35.5'],['M','M','38–40','48–50','48–50','L','165/88A','90–94','35.5–37'],['L','L','42–44','52–54','52–54','XL','170/92A','94–98','37–38.5'],['XL','XL','46','56','56','XXL','175/96A','98–102','38.5–40'],['XXL','XXL','48','58','58','3XL','180/100A','102–106','40–42'],['3XL','3XL','50','60','60','4XL','185/104A','106–110','42–43.5']]
+    },
+    unisex: {
+      title:'Outerwear — Unisex', sub:'Chest measurement in cm',
+      tip:'Unisex outerwear is cut wider. Women size down 1–2; men may find true to size or size up.',
+      measures:[{label:'Chest',desc:'Fullest part of chest'},{label:'Shoulder',desc:'Back width'},{label:'Length',desc:'Nape to hem'}],
+      countries:['Label','US','UK','EU','Chest cm','Chest in'],
+      rows:[['XS','XS','6–8','44','82–88','32–34.5'],['S','S','8–10','46','88–94','34.5–37'],['M','M','10–12','48','94–100','37–39.5'],['L','L','12–14','50','100–106','39.5–42'],['XL','XL','14–16','52','106–112','42–44'],['XXL','XXL','16–18','54','112–118','44–46.5']]
+    }
+  },
+  bra: {
+    women: {
+      title:'Bras & Intimates — Women', sub:'Band + Cup sizes',
+      tip:'Measure underbust for band size, overbust for cup. Cup = overbust minus underbust (each ~2.5 cm = 1 cup).',
+      measures:[{label:'Underbust',desc:'Directly under bust, snug but not tight'},{label:'Overbust',desc:'Around fullest part of bust'},{label:'Cup Diff',desc:'Overbust minus underbust'},{label:'Band',desc:'Underbust rounded to nearest even number'}],
+      countries:['US/CA','UK','EU','FR/BE','IT','AU/NZ','JP','Band cm','Cup Guide'],
+      rows:[['30A','30A','65A','80A','0A','8A','65A','63–67','AA–A'],['32A','32A','70A','85A','1A','10A','70A','68–72','A'],['32B','32B','70B','85B','1B','10B','70B','68–72','B'],['34A','34A','75A','90A','2A','12A','75A','73–77','A'],['34B','34B','75B','90B','2B','12B','75B','73–77','B'],['34C','34C','75C','90C','2C','12C','75C','73–77','C'],['34D','34D','75D','90D','2D','12D','75D','73–77','D'],['36B','36B','80B','95B','3B','14B','80B','78–82','B'],['36C','36C','80C','95C','3C','14C','80C','78–82','C'],['36D','36D','80D','95D','3D','14D','80D','78–82','D'],['36DD','36DD','80E','95E','3DD','14DD','80E','78–82','DD/E'],['38C','38C','85C','100C','4C','16C','85C','83–87','C'],['38D','38D','85D','100D','4D','16D','85D','83–87','D'],['38DD','38DD','85E','100E','4DD','16DD','85E','83–87','DD/E']]
+    }
+  },
+  swimwear: {
+    women: {
+      title:'Swimwear — Women', sub:'Bust / Waist / Hip in cm',
+      tip:'For one-piece swimwear use bust; for bikini tops use bust, bikini bottoms use hips. Swimwear runs small — size up if between sizes.',
+      measures:[{label:'Bust',desc:'Fullest part of bust'},{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest part of hips'},{label:'Torso',desc:'Shoulder over bust to crotch and back (for one-piece)'}],
+      countries:['Label','US','UK','EU','AU','FR','IT','JP','Bust cm','Waist cm','Hip cm'],
+      rows:[['XS','0','6','32','6','34','36','5','76–80','58–62','82–86'],['S','2–4','8','34–36','8–10','36–38','38–40','7–9','80–88','62–70','86–94'],['M','6–8','10','38','12','40–42','42','11–13','88–92','70–74','94–98'],['L','10–12','14','42–44','16','44','46–48','15–17','92–100','78–84','102–108'],['XL','14','16','46','18','46','50','19','100–106','84–90','108–114'],['XXL','16','18','48','20','48','52','21','106–112','90–96','114–120']]
+    },
+    men: {
+      title:'Swimwear — Men', sub:'Waist measurement in cm',
+      tip:'Men\'s swim trunks are sized by waist. Board shorts run larger — check length and fit preference.',
+      measures:[{label:'Waist',desc:'Natural waist, not hips'},{label:'Hips',desc:'Fullest part of seat'},{label:'Inseam',desc:'For swim shorts length'}],
+      countries:['Label','US','UK','EU','AU','JP','Waist cm','Hip cm'],
+      rows:[['XS','XS','28','44','28','S','68–72','86–90'],['S','S','30–32','46–48','30–32','M','72–80','90–98'],['M','M','32–34','48–50','32–34','L','80–86','98–104'],['L','L','34–36','50–52','34–36','XL','86–92','104–110'],['XL','XL','36–38','52–54','36–38','XXL','92–98','110–116'],['XXL','XXL','38–40','54–56','38–40','3XL','98–104','116–122']]
+    },
+    unisex: {
+      title:'Swimwear — Unisex', sub:'Waist measurement in cm',
+      tip:'Unisex swimwear follows men\'s waist sizing. Women size up 1–2 for comfort.',
+      measures:[{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest point'}],
+      countries:['Label','US','UK','EU','Waist cm'],
+      rows:[['XS','XS','6–8','44','60–68'],['S','S','8–10','46','68–76'],['M','M','10–12','48','76–84'],['L','L','12–14','50','84–92'],['XL','XL','14–16','52','92–100'],['XXL','XXL','16–18','54','100–108']]
+    }
+  },
+  sportswear: {
+    women: {
+      title:'Sportswear — Women', sub:'Chest / Waist in cm',
+      tip:'Athletic wear is designed for movement. For leggings use hips; for tops use chest. Compression wear typically runs 1 size smaller.',
+      measures:[{label:'Chest',desc:'Fullest part of bust'},{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest hips for leggings'},{label:'Inseam',desc:'For leggings/shorts length'}],
+      countries:['Label','US','UK','EU','AU','JP','Chest cm','Waist cm','Hip cm'],
+      rows:[['XS','XS','6','32','6','S','76–80','58–62','82–86'],['S','S','8','34','8','M','80–84','62–66','86–90'],['M','M','10','36','10','L','84–88','66–70','90–94'],['L','L','12','38','12','XL','88–94','70–76','94–100'],['XL','XL','14','40','14','XXL','94–100','76–82','100–106'],['XXL','XXL','16','42','16','3XL','100–108','82–90','106–114']]
+    },
+    men: {
+      title:'Sportswear — Men', sub:'Chest / Waist in cm',
+      tip:'For performance fit measure chest and waist. For relaxed athletic wear, chest measurement is usually sufficient.',
+      measures:[{label:'Chest',desc:'Fullest part of chest'},{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest part for shorts/bottoms'},{label:'Inseam',desc:'Shorts length'}],
+      countries:['Label','US','UK','EU','AU','JP','Chest cm','Waist cm'],
+      rows:[['XS','XS','34','44','34','S','82–86','68–72'],['S','S','36','46','36','M','86–90','72–76'],['M','M','38–40','48–50','38','L','90–96','76–82'],['L','L','42','52','42','XL','96–102','82–88'],['XL','XL','44–46','54–56','44','XXL','102–108','88–94'],['XXL','XXL','48','58','48','3XL','108–114','94–100']]
+    },
+    unisex: {
+      title:'Sportswear — Unisex', sub:'Chest measurement in cm',
+      tip:'Unisex athletic wear is cut for a relaxed, gender-neutral fit. Women size down 1–2 from men\'s.',
+      measures:[{label:'Chest',desc:'Fullest part'},{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest part'}],
+      countries:['Label','US','UK','EU','Chest cm'],
+      rows:[['XS','XS','6–8','44','80–86'],['S','S','8–10','46','86–92'],['M','M','10–12','48','92–98'],['L','L','12–14','50','98–104'],['XL','XL','14–16','52','104–110'],['XXL','XXL','16–18','54','110–116']]
+    }
+  },
+  underwear: {
+    women: {
+      title:'Underwear — Women', sub:'Hip/waist measurement in cm',
+      tip:'Women\'s underwear is sized by hip or waist (varies by brand). Check both measurements — hip sizing is more common.',
+      measures:[{label:'Waist',desc:'Natural waist circumference'},{label:'Hips',desc:'Fullest part of hips'}],
+      countries:['Label','US','UK','EU','FR','AU','JP','Waist cm','Hip cm'],
+      rows:[['XS','XS','6','32','34','6','S','58–62','82–86'],['S','S','8','34','36','8','M','62–66','86–90'],['M','M','10','36','38','10','L','66–72','90–96'],['L','L','12','38','40','12','XL','72–78','96–102'],['XL','XL','14','40','42','14','XXL','78–84','102–108'],['XXL','XXL','16','42','44','16','3XL','84–92','108–116']]
+    },
+    men: {
+      title:'Underwear — Men', sub:'Waist measurement in cm/inches',
+      tip:'Men\'s underwear is sized by waist. For briefs/boxers, measure natural waist. Sizes vary widely by brand.',
+      measures:[{label:'Waist',desc:'Natural waist, not hips'},{label:'Hips',desc:'Fullest part of seat'}],
+      countries:['Label','US','UK','EU','AU','JP','Waist cm','Waist in'],
+      rows:[['S','S','S','S','S','M','68–76','27–30'],['M','M','M','M','M','L','76–86','30–34'],['L','L','L','L','L','XL','86–96','34–38'],['XL','XL','XL','XL','XL','XXL','96–107','38–42'],['XXL','XXL','XXL','XXL','XXL','3XL','107–117','42–46'],['3XL','3XL','3XL','3XL','3XL','4XL','117–127','46–50']]
+    },
+    unisex: {
+      title:'Underwear — Unisex', sub:'Waist measurement in cm',
+      tip:'Unisex underwear uses waist sizing. Check the fit description — some are more boxers-cut, others briefs-cut.',
+      measures:[{label:'Waist',desc:'Natural waist'},{label:'Hips',desc:'Fullest point'}],
+      countries:['Label','US','UK','EU','Waist cm'],
+      rows:[['XS','XS','6–8','32–34','58–66'],['S','S','8–10','34–36','66–74'],['M','M','10–12','36–38','74–82'],['L','L','12–14','38–40','82–90'],['XL','XL','14–16','40–42','90–98'],['XXL','XXL','16–18','42–44','98–108']]
+    }
+  },
+  shoes: {
+    women: {
+      title:'Footwear — Women', sub:'Foot length in cm',
+      tip:'Measure foot from heel to longest toe on a flat surface. Measure both feet and use the larger size. Measure in the evening.',
+      measures:[{label:'Foot Length',desc:'Heel to longest toe'},{label:'Foot Width',desc:'Across widest part'},{label:'Evening Tip',desc:'Feet swell during the day'},{label:'Allowance',desc:'Add 0.5–1 cm for comfort'}],
+      countries:['US Women','UK','EU','JP cm','CN','AU','BR','Foot cm'],
+      rows:[['5','2.5','35','22.0','220','3.5','33','21.5–22.0'],['5.5','3','35.5','22.5','225','4','34','22.0–22.5'],['6','3.5','36','23.0','230','4.5','34–35','22.5–23.0'],['6.5','4','37','23.5','235','5','35','23.0–23.5'],['7','4.5','37.5','24.0','240','5.5','35–36','23.5–24.0'],['7.5','5','38','24.5','245','6','36','24.0–24.5'],['8','5.5','38.5','25.0','250','6.5','37','24.5–25.0'],['8.5','6','39','25.5','255','7','37–38','25.0–25.5'],['9','6.5','40','26.0','260','7.5','38','25.5–26.0'],['9.5','7','40.5','26.5','265','8','39','26.0–26.5'],['10','7.5','41','27.0','270','8.5','39–40','26.5–27.0'],['11','8.5','42','28.0','280','9.5','41','27.5–28.0']]
+    },
+    men: {
+      title:'Footwear — Men', sub:'Foot length in cm',
+      tip:'Men\'s shoes are about 1.5 sizes larger than women\'s US sizes. Always measure foot length for accuracy.',
+      measures:[{label:'Foot Length',desc:'Heel to longest toe flat'},{label:'Foot Width',desc:'Widest part of foot'},{label:'When to Measure',desc:'In the evening — feet expand'},{label:'Width',desc:'D=standard, E/EE=wide, 2A=narrow'}],
+      countries:['US Men','UK','EU','JP cm','CN','AU','BR','Foot cm'],
+      rows:[['6','5.5','38.5','24.0','240','6','37','23.5–24.0'],['6.5','6','39','24.5','245','6.5','38','24.0–24.5'],['7','6.5','40','25.0','250','7','38–39','24.5–25.0'],['7.5','7','40.5','25.5','255','7.5','39','25.0–25.5'],['8','7.5','41','26.0','260','8','40','25.5–26.0'],['8.5','8','42','26.5','265','8.5','40–41','26.0–26.5'],['9','8.5','42.5','27.0','270','9','41','26.5–27.0'],['9.5','9','43','27.5','275','9.5','42','27.0–27.5'],['10','9.5','44','28.0','280','10','42–43','27.5–28.0'],['10.5','10','44.5','28.5','285','10.5','43','28.0–28.5'],['11','10.5','45','29.0','290','11','44','28.5–29.0'],['12','11.5','46','30.0','300','12','45','29.5–30.0'],['13','12.5','47','31.0','310','13','46','30.5–31.0']]
+    },
+    unisex: {
+      title:'Footwear — Unisex', sub:'Foot length in cm',
+      tip:'Unisex shoes follow men\'s sizing. Women typically size down 1.5 from their women\'s US size.',
+      measures:[{label:'Foot Length',desc:'Heel to longest toe'},{label:'Tip',desc:'Women: subtract 1.5 from US women\'s size'}],
+      countries:['US Unisex','UK','EU','JP cm','Foot cm'],
+      rows:[['4','3.5','36','22.5','22.0–22.5'],['5','4','37','23.0','22.5–23.0'],['6','5','38','24.0','23.5–24.0'],['7','6','39','25.0','24.5–25.0'],['8','7','41','26.0','25.5–26.0'],['9','8','42.5','27.0','26.5–27.0'],['10','9.5','44','28.0','27.5–28.0'],['11','10.5','45','29.0','28.5–29.0'],['12','11.5','46','30.0','29.5–30.0']]
+    }
+  },
+  socks: {
+    women: {
+      title:'Socks — Women', sub:'Shoe size / foot length',
+      tip:'Socks are typically sized by shoe size range. Crew and knee-high socks also consider calf circumference.',
+      measures:[{label:'Shoe Size',desc:'Your regular women\'s shoe size'},{label:'Foot Length',desc:'Heel to toe in cm'},{label:'Calf',desc:'For knee-highs: around widest part of calf'}],
+      countries:['Sock Size','US Women Shoe','UK Shoe','EU Shoe','Foot cm'],
+      rows:[['4–6','5–7','3–5','35–37','22–24'],['6–8','7–9','5–7','37–39','24–26'],['8–10','9–11','7–9','39–41','26–28'],['9–11','10–12','8–10','40–42','27–29'],['10–13','11–13','9–11','41–44','28–31']]
+    },
+    men: {
+      title:'Socks — Men', sub:'Shoe size / foot length',
+      tip:'Men\'s socks are sized slightly larger. For compression socks, also measure calf circumference.',
+      measures:[{label:'Shoe Size',desc:'Your regular men\'s shoe size'},{label:'Foot Length',desc:'Heel to toe in cm'},{label:'Calf',desc:'For compression/knee-highs'}],
+      countries:['Sock Size','US Men Shoe','UK Shoe','EU Shoe','Foot cm'],
+      rows:[['6–8','6–8','5.5–7.5','38–41','24–26'],['8–10','8–10','7.5–9.5','41–44','26–28'],['10–12','10–12','9.5–11.5','44–46','28–30'],['12–14','12–14','11.5–13.5','46–48','30–32']]
+    },
+    unisex: {
+      title:'Socks — Unisex', sub:'Shoe size / foot length',
+      tip:'Unisex socks follow men\'s sizing. Women typically size down one size range.',
+      measures:[{label:'Shoe Size',desc:'Men\'s equivalent shoe size'},{label:'Foot Length',desc:'Heel to toe in cm'}],
+      countries:['Sock Size','US Shoe','UK Shoe','EU Shoe','Foot cm'],
+      rows:[['4–6','4–6','3–5','35–38','21–24'],['6–8','6–8','5–7','38–41','24–26'],['8–10','8–10','7–9','41–44','26–28'],['10–12','10–12','9–11','44–46','28–30'],['12–14','12–14','11–13','46–48','30–32']]
+    }
+  },
+  kids: {
+    unisex: {
+      title:'Kids & Children — Unisex', sub:'Height-based sizing in cm',
+      tip:'Children\'s sizes are best matched by height and weight together. Always check chest and waist for a precise fit.',
+      measures:[{label:'Height',desc:'Standing barefoot, head level'},{label:'Chest',desc:'Around fullest part of chest'},{label:'Waist',desc:'Natural waist, relaxed'},{label:'Weight',desc:'Helps with toddler sizing'}],
+      countries:['Age','US','UK','EU','JP','CN','AU','Height cm','Chest cm','Waist cm'],
+      rows:[['2T','2T','2','92','95','90','2','86–92','52–55','48–50'],['3T','3T','3','98','100','95','3','92–98','54–57','50–52'],['4','4','4','104','105','100','4','98–104','56–59','52–54'],['5','5','5','110','110','105','5','104–110','58–61','53–55'],['6','6','6','116','115','110','6','110–116','60–64','54–57'],['7','7','7','122','120','115','7','116–122','62–66','55–58'],['8','8','8','128','130','120','8','122–128','64–68','57–60'],['10','10','9','134','140','130','10','128–134','66–70','59–62'],['12','12','11','140','145','140','12','134–140','70–74','61–64'],['14','14','13','146','155','150','14','140–148','74–78','63–66'],['16','16','14','152','160','155','16','148–155','78–82','65–68']]
+    }
+  }
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+var currentGender = 'women';
+var currentCategory = 'tops';
+var activeCountries = {};
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function init() {
+  buildCategoryTabs();
+  setGender('women');
+}
+
+function buildCategoryTabs() {
+  var tabsEl = document.getElementById('categoryTabs');
+  tabsEl.innerHTML = '';
+  categories.forEach(function(cat) {
+    var btn = document.createElement('button');
+    btn.className = 'tab-btn' + (cat.id === currentCategory ? ' active' : '');
+    btn.textContent = cat.label;
+    btn.setAttribute('data-id', cat.id);
+    btn.onclick = function() { setCategory(cat.id); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function setGender(g) {
+  currentGender = g;
+  document.getElementById('genderLabel').textContent = g.charAt(0).toUpperCase() + g.slice(1);
+  document.getElementById('btnMen').className = 'gender-btn' + (g === 'men' ? ' active-men' : '');
+  document.getElementById('btnWomen').className = 'gender-btn' + (g === 'women' ? ' active-women' : '');
+  document.getElementById('btnUnisex').className = 'gender-btn' + (g === 'unisex' ? ' active-unisex' : '');
+  // If current category doesn't support the gender, switch to first available
+  var cat = categories.find(function(c) { return c.id === currentCategory; });
+  if (cat && cat.genders.indexOf(g) === -1) {
+    var first = categories.find(function(c) { return c.genders.indexOf(g) !== -1; });
+    if (first) currentCategory = first.id;
+  }
+  buildCategoryTabs();
+  renderAll();
+}
+
+function setCategory(catId) {
+  currentCategory = catId;
+  var cat = categories.find(function(c) { return c.id === catId; });
+  // If gender not supported, auto-switch to unisex or first available
+  if (cat && cat.genders.indexOf(currentGender) === -1) {
+    if (cat.genders.indexOf('unisex') !== -1) currentGender = 'unisex';
+    else currentGender = cat.genders[0];
+    document.getElementById('genderLabel').textContent = currentGender.charAt(0).toUpperCase() + currentGender.slice(1);
+    document.getElementById('btnMen').className = 'gender-btn' + (currentGender === 'men' ? ' active-men' : '');
+    document.getElementById('btnWomen').className = 'gender-btn' + (currentGender === 'women' ? ' active-women' : '');
+    document.getElementById('btnUnisex').className = 'gender-btn' + (currentGender === 'unisex' ? ' active-unisex' : '');
+  }
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-id') === catId);
+  });
+  renderAll();
+}
+
+function getSvgKey() {
+  var key = currentCategory + '_' + currentGender;
+  if (svgMap[key]) return key;
+  // fallback to unisex or women
+  if (svgMap[currentCategory + '_unisex']) return currentCategory + '_unisex';
+  if (svgMap[currentCategory + '_women']) return currentCategory + '_women';
+  return null;
+}
+
+function renderAll() {
+  var d = getTableData();
+  var svgKey = getSvgKey();
+
+  // SVG
+  document.getElementById('svgContainer').innerHTML = svgKey ? svgMap[svgKey] : '<p style="color:var(--muted);font-size:0.85rem;text-align:center">Preview coming soon</p>';
+  document.getElementById('garmentName').textContent = d ? d.title : '';
+  document.getElementById('garmentSub').textContent = d ? d.sub : '';
+  document.getElementById('tipText').textContent = d ? d.tip : '';
+  document.getElementById('tableTitle').textContent = d ? d.title : '';
+
+  // Badge
+  var badge = document.getElementById('genderBadge');
+  badge.textContent = currentGender.charAt(0).toUpperCase() + currentGender.slice(1) + ' Sizes';
+  badge.className = 'badge badge-' + currentGender;
+
+  if (!d) {
+    document.getElementById('countryFilter').innerHTML = '';
+    document.getElementById('tableHead').innerHTML = '';
+    document.getElementById('tableBody').innerHTML = '<tr><td class="no-data" colspan="20">No size data available for this combination.</td></tr>';
+    document.getElementById('measureGrid').innerHTML = '';
+    return;
+  }
+
+  // Country filter
+  var key = currentCategory + '_' + currentGender;
+  if (!activeCountries[key]) activeCountries[key] = new Set();
+  var active = activeCountries[key];
+
+  var cf = document.getElementById('countryFilter');
+  cf.innerHTML = '';
+  d.countries.forEach(function(c, i) {
+    if (i === 0) return;
+    var btn = document.createElement('button');
+    btn.className = 'country-btn' + (active.has(c) ? ' active' : '');
+    btn.textContent = c;
+    btn.onclick = function() {
+      if (active.has(c)) active.delete(c); else active.add(c);
+      renderTable(d, active);
+      document.querySelectorAll('.country-btn').forEach(function(b) {
+        b.classList.toggle('active', active.has(b.textContent));
+      });
+    };
+    cf.appendChild(btn);
+  });
+
+  renderTable(d, active);
+
+  // Measures
+  var mg = document.getElementById('measureGrid');
+  var mgHtml = '';
+  d.measures.forEach(function(m) {
+    mgHtml += '<div class="measure-card"><strong>' + m.label + '</strong>' + m.desc + '</div>';
+  });
+  mg.innerHTML = mgHtml;
+}
+
+function getTableData() {
+  if (!tableData[currentCategory]) return null;
+  if (tableData[currentCategory][currentGender]) return tableData[currentCategory][currentGender];
+  return null;
+}
+
+function renderTable(d, active) {
+  var cols = d.countries;
+  var visible = cols.map(function(c, i) {
+    if (i === 0) return true;
+    return active.size === 0 || active.has(c);
+  });
+
+  var th = document.getElementById('tableHead');
+  var headHtml = '<tr>';
+  cols.forEach(function(c, i) { if (visible[i]) headHtml += '<th>' + c + '</th>'; });
+  headHtml += '</tr>';
+  th.innerHTML = headHtml;
+
+  var tb = document.getElementById('tableBody');
+  var bodyHtml = '';
+  d.rows.forEach(function(row, ri) {
+    var cells = '';
+    row.forEach(function(cell, ci) { if (visible[ci]) cells += '<td>' + cell + '</td>'; });
+    bodyHtml += '<tr class="' + (ri % 2 === 0 ? '' : 'highlight-row') + '">' + cells + '</tr>';
+  });
+  tb.innerHTML = bodyHtml;
+}
+
+init();
+</script>
+</body>
+</html>
